@@ -3,14 +3,14 @@ SELECT
 	 SELECT  ResourceName 	
 	 from [pjrep].[MSP_EpmResource_UserView]  
 	 where [pjrep].[MSP_EpmResource_UserView].[ResourceUID] = merbduv.[ResourceUID]) as ResourceName,
-	   CategoryWorks AS 'Категория ТрЗТ',
+	   CategoryWorks AS 'РљР°С‚РµРіРѕСЂРёСЏ РўСЂР—С‚',
        [Projectname],
 	   [TaskName],
 	   CAST(CAST((CAST(YEAR(merbduv.TimeByDay) AS VARCHAR(4))+'-'+ CAST(MONTH(merbduv.TimeByDay) AS VARCHAR(2))+'-1') AS VARCHAR(10)) AS DATE) AS MonthDate,
   --     merbduv.Capacity as [ResourceCapacity],
        ISNULL(AssignmentTable.AllocatedCapacity,0) as [AllocatedCapacity],
 	   AssignmentTable2.MonthCapacity,
-       (SELECT [Подразделения] FROM [pjrep].MSP_EpmResource_UserView WHERE [pjrep].MSP_EpmResource_UserView.ResourceUID = merbduv.ResourceUID ANd [Подразделения] is not NULL)	 as [Division],
+       (SELECT [РџРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ] FROM [pjrep].MSP_EpmResource_UserView WHERE [pjrep].MSP_EpmResource_UserView.ResourceUID = merbduv.ResourceUID ANd [РџРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ] is not NULL)	 as [Division],
        (SELECT  EpmResUV.ResourceNTAccount FROM [pjrep].MSP_EpmResource_UserView EpmResUV WHERE EpmResUV.ResourceUID = merbduv.ResourceUID )	 as [ResourceNTAccoun]
 
 				-------//---------
@@ -42,7 +42,7 @@ GROUP BY
 					CAST(MONTH(AssBdUv.TimeByDay) AS VARCHAR(2))+'-1') AS VARCHAR(10)) AS DATE) AS MonthDate,
 
              SUM(AssBdUv.AssignmentCombinedWork) as [AllocatedCapacity],
-             [pjrep].MSP_EpmProject_UserView.[категория трудозатрат] as CategoryWorks,
+             [pjrep].MSP_EpmProject_UserView.[РљР°С‚РµРіРѕСЂРёСЏ С‚СЂСѓРґРѕР·Р°С‚СЂР°С‚] as CategoryWorks,
 			 [pjrep].MSP_EpmProject_UserView.ProjectName as ProjectName,
 			[pjrep].MSP_EpmTask_UserView.TaskName as TaskName
 
@@ -70,7 +70,7 @@ GROUP BY
                 [pjrep].MSP_EpmAssignment_UserView.ResourceUID,
 				CAST(CAST((CAST(YEAR(AssBdUv.TimeByDay) AS VARCHAR(4))+'-'+ 
 					CAST(MONTH(AssBdUv.TimeByDay) AS VARCHAR(2))+'-1') AS VARCHAR(10)) AS DATE),
-				[pjrep].MSP_EpmProject_UserView.[категория трудозатрат],
+				[pjrep].MSP_EpmProject_UserView.[РљР°С‚РµРіРѕСЂРёСЏ С‚СЂСѓРґРѕР·Р°С‚СЂР°С‚],
 				[pjrep].MSP_EpmProject_UserView.ProjectName,
 				[pjrep].MSP_EpmTask_UserView.TaskName
 				
